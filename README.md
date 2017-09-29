@@ -9,6 +9,9 @@ It consists of a fake login page (without drawer) and also other pages that can 
 
 ![Demo2](http://g.recordit.co/XZCoVGHup4.gif)
 
+**Display different drawer items based on redux store**
+![Demo3](http://g.recordit.co/TZbxjkvRA0.gif)
+
 **Navigation Structure**
 ```
 -StackNavigator
