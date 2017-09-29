@@ -1,0 +1,7 @@
+{
+  "drawerItems": [
+    "HomeScreen",
+    "UserScreen",
+    "DashboardScreen"
+  ]
+}

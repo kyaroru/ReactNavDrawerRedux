@@ -3,6 +3,7 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import Actions from 'actions';
 import { connect } from 'react-redux';
@@ -24,14 +25,22 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: Colors.primary,
   },
+  spinnerViewBg: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#333',
+    opacity: 0.5,
+  },
+  spinner: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    height: 10,
+  },
 });
 
 class DrawerContent extends Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-  }
-
   onItemPress(item) {
     const { navigation } = this.props;
     navigation.navigate(item.key);
@@ -49,19 +58,28 @@ class DrawerContent extends Component {
   }
 
   render() {
-    const { navigation } = this.props;
+    const { navigation, isFetching } = this.props;
     return (
       <View style={styles.container}>
-        <View>
+        {!isFetching && <View>
           {navigation.state.routes.map(route => this.renderDrawerItem(route))}
-        </View>
+        </View>}
+        {isFetching && <View style={styles.spinnerViewBg}>
+          <View style={styles.spinner}>
+            <ActivityIndicator
+              size="small"
+              animating
+            />
+          </View>
+        </View>}
       </View>
     );
   }
 }
 
 const mapStateToProps = store => ({
-  drawerItems: store.DRAWER,
+  drawerItems: store.DRAWER.items,
+  isFetching: store.DRAWER.isFetching,
 });
 
 const mapDispatchToProps = {

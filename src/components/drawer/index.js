@@ -2,27 +2,13 @@ import { DrawerNavigator } from 'react-navigation';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { getNavigationOptionsWithAction, getDrawerNavigationOptions } from '../../utils/navigation';
-import NavBarItem from '../common/NavBarItem';
 import HomeScreen from '../home';
 import UserScreen from '../user';
 import DashboardScreen from '../dashboard';
 import * as Colors from '../../themes/colors';
 import DrawerContent from './content';
+import DrawerMenu from './menu';
 
-const getDrawerItem = navigation => (
-  <NavBarItem
-    iconName="bars"
-    onPress={() => {
-      if (navigation.state.index === 0) {
-        // check if drawer is not open, then only open it
-        navigation.navigate('DrawerOpen');
-      } else {
-        // else close the drawer
-        navigation.navigate('DrawerClose');
-      }
-    }}
-  />
-);
 const getDrawerIcon = (iconName, tintColor) => <Icon name={iconName} size={20} color={tintColor} />;
 
 const homeDrawerIcon = ({ tintColor }) => getDrawerIcon('home', tintColor);
@@ -44,6 +30,6 @@ const Drawer = DrawerNavigator({
   contentComponent: props => <DrawerContent {...props} />,
 });
 
-Drawer.navigationOptions = ({ navigation }) => getNavigationOptionsWithAction('ReactNavDrawer', Colors.primary, 'white', getDrawerItem(navigation));
+Drawer.navigationOptions = ({ navigation }) => getNavigationOptionsWithAction('ReactNavDrawer', Colors.primary, 'white', <DrawerMenu navigation={navigation} />);
 
 export default Drawer;

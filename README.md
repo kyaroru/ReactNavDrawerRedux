@@ -4,17 +4,17 @@ A simple example of using DrawerNavigator in React Navigation (With REDUX integr
 
 It consists of a fake login page (without drawer) and also other pages that can be seen only after login (with drawer)
 
-**Demo 1**
+**Display different drawer items on button click**
 
-![Demo](http://g.recordit.co/GR6zYZAV9O.gif)
+![Demo1](http://g.recordit.co/TZbxjkvRA0.gif)
 
-**Demo 2**
+**Display different drawer items after fetch from server**
 
-![Demo2](http://g.recordit.co/XZCoVGHup4.gif)
+![Demo2](http://g.recordit.co/VEOTYN9G7q.gif)
 
-**Display different drawer items based on redux store**
+**Cancel request if drawer is closed**
 
-![Demo3](http://g.recordit.co/TZbxjkvRA0.gif)
+![Demo3](http://g.recordit.co/azunGDuaON.gif)
 
 **Navigation Structure**
 ```
