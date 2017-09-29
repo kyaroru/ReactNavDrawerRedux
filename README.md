@@ -1,4 +1,4 @@
-# ReactNavDrawer
+# ReactNavDrawerRedux
 
 A simple example of using DrawerNavigator in React Navigation (With REDUX integration)
 
@@ -23,4 +23,5 @@ react-native run-android
 ```
 
 **For example without redux**
+
 Refer to [ReactNavDrawer](https://github.com/kyaroru/ReactNavDrawer)
