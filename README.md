@@ -23,6 +23,7 @@ It consists of a fake login page (without drawer) and also other pages that can 
    -DrawerNavigator
       -HomeScreen
       -UserScreen
+      -DashboardScreen
 ```
 
 **To run the app**
