@@ -6,7 +6,7 @@ import reducers from './reducers';
 const sagaMiddleware = createSagaMiddleware();
 let middleware;
 
-/* global __DEV__*/
+/* global __DEV__ */
 if (__DEV__) {
   middleware = applyMiddleware(sagaMiddleware, createLogger());
 } else {

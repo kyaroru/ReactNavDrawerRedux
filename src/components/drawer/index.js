@@ -1,17 +1,13 @@
 import { DrawerNavigator } from 'react-navigation';
-// import {
-//   View,
-// } from 'react-native';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-import React, { Component } from 'react';
+import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { getNavigationOptionsWithAction, getDrawerConfig, getDrawerNavigationOptions } from '../../utils/navigation';
+import { getNavigationOptionsWithAction, getDrawerNavigationOptions } from '../../utils/navigation';
 import NavBarItem from '../common/NavBarItem';
-// import * as ducks from '../../ducks';
 import HomeScreen from '../home';
 import UserScreen from '../user';
+import DashboardScreen from '../dashboard';
 import * as Colors from '../../themes/colors';
+import DrawerContent from './content';
 
 const getDrawerItem = navigation => (
   <NavBarItem
@@ -31,42 +27,23 @@ const getDrawerIcon = (iconName, tintColor) => <Icon name={iconName} size={20} c
 
 const homeDrawerIcon = ({ tintColor }) => getDrawerIcon('home', tintColor);
 const userDrawerIcon = ({ tintColor }) => getDrawerIcon('user', tintColor);
+const dashboardDrawerIcon = ({ tintColor }) => getDrawerIcon('bar-chart', tintColor);
 
 const homeNavOptions = getDrawerNavigationOptions('Home', Colors.primary, 'white', homeDrawerIcon);
 const userNavOptions = getDrawerNavigationOptions('Users', Colors.primary, 'white', userDrawerIcon);
+const dashboardNavOptions = getDrawerNavigationOptions('Dashboard', Colors.primary, 'white', dashboardDrawerIcon);
 
 const Drawer = DrawerNavigator({
   HomeScreen: { screen: HomeScreen, navigationOptions: homeNavOptions },
   UserScreen: { screen: UserScreen, navigationOptions: userNavOptions },
+  DashboardScreen: { screen: DashboardScreen, navigationOptions: dashboardNavOptions },
 }, {
   drawerWidth: 300,
   drawerPosition: 'left',
   initialRouteName: 'HomeScreen',
+  contentComponent: props => <DrawerContent {...props} />,
 });
 
-// class Drawer extends Component {
-//   render() {
-//     const { nav, dispatch } = this.props;
-//     const DrawerNavigator = drawerNavigator;
-//     return (
-//       <DrawerNavigator />
-//     );
-//   }
-// }
-
-// Drawer.propTypes = {
-//   drawerItems: PropTypes.object,
-// };
-
 Drawer.navigationOptions = ({ navigation }) => getNavigationOptionsWithAction('ReactNavDrawer', Colors.primary, 'white', getDrawerItem(navigation));
-
-// const mapStateToProps = store => ({
-//   drawerItems: store.drawerItems,
-//   nav: store.nav,
-// });
-
-// const mapDispatchToProps = {
-//   updateDrawerItems: ducks.updateDrawerItems,
-// };
 
 export default Drawer;

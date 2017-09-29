@@ -9,11 +9,11 @@ class App extends Component {
 
     return (
       <AppNavigator
-          navigation={addNavigationHelpers({
-            dispatch,
-            state: nav,
-          })}
-        />
+        navigation={addNavigationHelpers({
+          dispatch,
+          state: nav,
+        })}
+      />
     );
   }
 }

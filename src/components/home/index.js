@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   Text,
-  AsyncStorage,
   TouchableOpacity,
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
@@ -24,12 +23,40 @@ class HomeScreen extends Component {
     navigation.dispatch(navigateAction);
   }
 
+  addUserScreen() {
+    const { drawerItems } = this.props;
+    const newItems = [
+      ...drawerItems,
+      'UserScreen',
+    ];
+    this.props.updateDrawerItems(newItems);
+  }
+
+  addDashboardScreen() {
+    const { drawerItems } = this.props;
+    const newItems = [
+      ...drawerItems,
+      'DashboardScreen',
+    ];
+    this.props.updateDrawerItems(newItems);
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <View style={[styles.input, { borderColor: Colors.primary }]}>
           <TouchableOpacity style={styles.btnSubmit} onPress={() => this.logout()}>
             <Text style={{ textAlign: 'center', color: Colors.primary }}>Logout</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={[styles.input, { borderColor: Colors.primary, marginTop: 10 }]}>
+          <TouchableOpacity style={styles.btnSubmit} onPress={() => this.addUserScreen()}>
+            <Text style={{ textAlign: 'center', color: Colors.primary }}>Press to reveal UserScreen</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={[styles.input, { borderColor: Colors.primary, marginTop: 10 }]}>
+          <TouchableOpacity style={styles.btnSubmit} onPress={() => this.addDashboardScreen()}>
+            <Text style={{ textAlign: 'center', color: Colors.primary }}>Press to reveal DashboardScreen</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -59,10 +86,12 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = store => ({
   currentUser: store.USER,
+  drawerItems: store.DRAWER,
 });
 
 const mapDispatchToProps = {
   updateCurrentUser: Actions.updateCurrentUser,
+  updateDrawerItems: Actions.updateDrawerItems,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
