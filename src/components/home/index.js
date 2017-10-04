@@ -13,8 +13,9 @@ import * as Colors from '../../themes/colors';
 
 class HomeScreen extends Component {
   logout() {
-    const { updateCurrentUser, navigation } = this.props;
+    const { updateCurrentUser, navigation, clearHomeData } = this.props;
     updateCurrentUser({});
+    clearHomeData();
     const navigateAction = NavigationActions.reset({
       index: 0,
       actions: [
@@ -120,6 +121,7 @@ const mapDispatchToProps = {
   updateCurrentUser: Actions.updateCurrentUser,
   updateDrawerItems: Actions.updateDrawerItems,
   fetchHomeData: Actions.fetchHomeData,
+  clearHomeData: Actions.clearHomeData,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

@@ -20,6 +20,12 @@ const home = (state = { data: [], isFetching: false, error: null }, action) => {
         isFetching: false,
         error: action.error,
       };
+    case Actions.CLEAR_HOME_DATA:
+      return {
+        data: [],
+        isFetching: false,
+        error: null,
+      };
     default:
       return state;
   }

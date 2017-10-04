@@ -22,7 +22,6 @@ function* fetchDrawerItems() {
   const { routeName } = yield take(Actions.GO_TO);
   const isFetchingDrawerItems = yield select(Actions.isFetchingDrawerItems);
   if (routeName === 'DrawerClose' && isFetchingDrawerItems) {
-    console.log('cancelling task');
     yield cancel(task);
   }
 }
