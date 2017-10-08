@@ -1,0 +1,17 @@
+{
+  "title": "Super video",
+  "body": [
+    {
+      "type": "button",
+      "title": "User 333",
+      "link": "user-333",
+      "target": "page"
+    },
+    {
+      "type": "button",
+      "title": "Complain",
+      "link": "video-11-complain",
+      "target": "drawer"
+    }
+  ]
+}

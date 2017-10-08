@@ -1,0 +1,17 @@
+{
+  "title": "User 333 - Friends",
+  "body": [
+    {
+      "type": "button",
+      "title": "Friend 1",
+      "link": "user-333-friend-1",
+      "target": "page"
+    },
+    {
+      "type": "button",
+      "title": "Friend 2",
+      "link": "user-333-friend-2",
+      "target": "page"
+    }
+  ]
+}

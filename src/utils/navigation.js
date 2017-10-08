@@ -10,7 +10,7 @@ export const getNavigationOptions = (title, backgroundColor, color) => ({
   headerTintColor: color,
 });
 
-export const getNavigationOptionsWithAction = (title, backgroundColor, color, headerLeft) => ({
+export const getNavigationOptionsWithAction = (title, backgroundColor, color, headerRight) => ({
   title,
   headerStyle: {
     backgroundColor,
@@ -19,7 +19,7 @@ export const getNavigationOptionsWithAction = (title, backgroundColor, color, he
     color,
   },
   headerTintColor: color,
-  headerLeft,
+  headerRight,
 });
 
 export const getDrawerNavigationOptions = (title, backgroundColor, titleColor, drawerIcon) => ({

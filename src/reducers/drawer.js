@@ -1,6 +1,6 @@
 import Actions from 'actions';
 
-const drawer = (state = { title: 'Drawer Items', items: ['HomeScreen'], isFetching: false, error: null }, action) => {
+const drawer = (state = { title: 'Drawer Items', link: 'video-11-complain', items: [], isFetching: false, error: null }, action) => {
   switch (action.type) {
     case Actions.FETCH_DRAWER_ITEMS:
       return {
@@ -10,6 +10,7 @@ const drawer = (state = { title: 'Drawer Items', items: ['HomeScreen'], isFetchi
       };
     case Actions.FETCH_DRAWER_ITEMS_SUCCESS:
       return {
+        ...state,
         items: action.items,
         title: action.title,
         isFetching: false,
@@ -25,6 +26,11 @@ const drawer = (state = { title: 'Drawer Items', items: ['HomeScreen'], isFetchi
       return {
         ...state,
         items: action.items,
+      };
+    case Actions.SET_DRAWER_LINK:
+      return {
+        ...state,
+        link: action.link,
       };
     default:
       return state;

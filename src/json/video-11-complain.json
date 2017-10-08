@@ -1,0 +1,17 @@
+{
+  "title": "Super video - Complain",
+  "body": [
+    {
+      "type": "button",
+      "title": "Complain 1",
+      "link": "video-11-complain-1",
+      "target": "page"
+    },
+    {
+      "type": "button",
+      "title": "Complain 2",
+      "link": "video-11-complain-2",
+      "target": "page"
+    }
+  ]
+}

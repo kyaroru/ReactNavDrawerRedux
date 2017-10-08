@@ -4,7 +4,7 @@ const home = (state = { data: [], isFetching: false, error: null }, action) => {
   switch (action.type) {
     case Actions.FETCH_HOME_DATA:
       return {
-        data: [],
+        ...state,
         isFetching: true,
         error: null,
       };

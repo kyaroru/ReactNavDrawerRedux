@@ -5,8 +5,9 @@ export const FETCH_HOME_DATA_SUCCESS = `${HOME}/FETCH_HOME_DATA_SUCCESS`;
 export const FETCH_HOME_DATA_FAIL = `${HOME}/FETCH_HOME_DATA_FAIL`;
 export const CLEAR_HOME_DATA = `${HOME}/CLEAR_HOME_DATA`;
 
-export const fetchHomeData = () => ({
+export const fetchHomeData = screenName => ({
   type: FETCH_HOME_DATA,
+  screenName,
 });
 
 export const fetchHomeDataSuccess = data => ({

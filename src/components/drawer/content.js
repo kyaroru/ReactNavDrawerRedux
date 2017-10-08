@@ -8,6 +8,7 @@ import {
 import Actions from 'actions';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import isEmpty from 'lodash/isEmpty';
 import * as Colors from '../../themes/colors';
 
 const styles = StyleSheet.create({
@@ -49,32 +50,24 @@ const styles = StyleSheet.create({
 });
 
 class DrawerContent extends Component {
-  onItemPress(item) {
-    const { navigation } = this.props;
-    navigation.navigate(item.key);
-  }
-
-  renderDrawerItem(route) {
+  renderDrawerItem(item) {
     const { drawerItems } = this.props;
-    if (drawerItems.indexOf(route.key) > -1) {
-      return (
-        <TouchableOpacity style={styles.drawerItem} key={route.key} onPress={() => this.onItemPress(route)}>
-          <Text>{route.routeName}</Text>
-        </TouchableOpacity>
-      );
-    }
-    return null;
+    return (
+      <TouchableOpacity style={styles.drawerItem} key={item.title}>
+        <Text>{item.title}</Text>
+      </TouchableOpacity>
+    );
   }
 
   render() {
-    const { navigation, isFetching, drawerItemsTitle } = this.props;
+    const { navigation, isFetching, drawerItemsTitle, drawerItems } = this.props;
     return (
       <View style={styles.container}>
         {!isFetching && <View style={styles.drawerItemTitle}>
           <Text style={styles.drawerItemTitleText}>{drawerItemsTitle}</Text>
         </View>}
-        {!isFetching && <View>
-          {navigation.state.routes.map(route => this.renderDrawerItem(route))}
+        {!isFetching && !isEmpty(drawerItems) && <View>
+          {drawerItems.map(item => this.renderDrawerItem(item))}
         </View>}
         {isFetching && <View style={styles.spinnerViewBg}>
           <View style={styles.spinner}>

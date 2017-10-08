@@ -1,0 +1,23 @@
+{
+  "title": "User 333",
+  "body": [
+    {
+      "type": "button",
+      "title": "Chat",
+      "link": "user-333-chat-user-555",
+      "target": "page"
+    },
+    {
+      "type": "button",
+      "title": "Friend",
+      "link": "user-333-friends",
+      "target": "drawer"
+    },
+    {
+      "type": "button",
+      "title": "Back",
+      "link": "video-11",
+      "target": "page"
+    }
+  ]
+}

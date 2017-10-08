@@ -15,20 +15,18 @@ import * as Colors from '../../themes/colors';
 class HomeScreen extends Component {
   componentDidMount() {
     const { fetchHomeData } = this.props;
-    fetchHomeData();
+    fetchHomeData('video-11');
   }
 
-  logout() {
-    const { updateCurrentUser, navigation, clearHomeData } = this.props;
-    updateCurrentUser({});
-    clearHomeData();
-    const navigateAction = NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'LoginScreen' }),
-      ],
-    });
-    navigation.dispatch(navigateAction);
+  openTarget(item) {
+    const { drawerLink } = this.props;
+    if (item.target === 'drawer') {
+      this.props.setDrawerLink(item.link);
+      this.props.fetchDrawerItems();
+      this.props.navigation.navigate('DrawerOpen');
+    } else {
+      this.props.fetchHomeData(item.link);
+    }
   }
 
   render() {
@@ -40,18 +38,15 @@ class HomeScreen extends Component {
             <Text style={styles.titleText}>{homeData.title}</Text>
           </View>
         }
-        {!isEmpty(homeData) && homeData.items.map(item => (
-          <View style={styles.item} key={item}>
-            <Text>{item}</Text>
+        {!isEmpty(homeData) && homeData.body.map(item => (
+          <View style={styles.section} key={item.title}>
+            <View style={styles.btnContainer}>
+              <TouchableOpacity style={styles.btnSubmit} onPress={() => this.openTarget(item)}>
+                <Text style={{ textAlign: 'center', color: Colors.primary }}>{item.title} (Type: {item.target})</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         ))}
-        <View style={styles.section}>
-          <View style={styles.btnContainer}>
-            <TouchableOpacity style={styles.btnSubmit} onPress={() => this.logout()}>
-              <Text style={{ textAlign: 'center', color: Colors.primary }}>Logout</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
         {isFetching && <View style={styles.spinnerViewBg}>
           <View style={styles.spinner}>
             <ActivityIndicator
@@ -122,6 +117,7 @@ const mapStateToProps = store => ({
   drawerItems: store.DRAWER.items,
   homeData: store.HOME.data,
   isFetching: store.HOME.isFetching,
+  drawerLink: Actions.getDrawerLink(store),
 });
 
 const mapDispatchToProps = {
@@ -129,6 +125,8 @@ const mapDispatchToProps = {
   updateDrawerItems: Actions.updateDrawerItems,
   fetchHomeData: Actions.fetchHomeData,
   clearHomeData: Actions.clearHomeData,
+  fetchDrawerItems: Actions.fetchDrawerItems,
+  setDrawerLink: Actions.setDrawerLink,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

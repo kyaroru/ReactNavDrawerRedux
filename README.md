@@ -2,21 +2,17 @@
 
 A simple example of using DrawerNavigator in React Navigation (With REDUX integration)
 
-It consists of a fake login page (without drawer) and also other pages that can be seen only after login (with drawer)
+It consists only 1 screen in drawer navigatior which is HomeScreen that will render everything including Drawer items based on server response :p
 
 **Display different drawer items for different screen after fetch from server**
 
-![Demo](http://g.recordit.co/g5BI1pnyIl.gif)
+![Demo](http://g.recordit.co/rRfkYiCU7Q.gif)
 
 **Navigation Structure**
 ```
 -StackNavigator
-   -LoginScreen
    -DrawerNavigator
       -HomeScreen
-      -UserScreen
-      -DashboardScreen
-      -AboutScreen
 ```
 
 **To run the app**

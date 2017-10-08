@@ -3,8 +3,8 @@ import Actions from 'actions';
 import { delay } from 'redux-saga';
 import * as api from '../api';
 
-function* fetchHomeData() {
-  const result = yield call(api.fetchScreenData, 'HomeScreen');
+function* fetchHomeData({ screenName }) {
+  const result = yield call(api.fetchScreenData, screenName);
   yield call(delay, 1000);
   if (result) {
     yield put(Actions.fetchHomeDataSuccess(result));
