@@ -9,9 +9,15 @@ import {
 import { NavigationActions } from 'react-navigation';
 import Actions from 'actions';
 import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 import * as Colors from '../../themes/colors';
 
 class HomeScreen extends Component {
+  componentDidMount() {
+    const { fetchHomeData } = this.props;
+    fetchHomeData();
+  }
+
   logout() {
     const { updateCurrentUser, navigation, clearHomeData } = this.props;
     updateCurrentUser({});
@@ -25,28 +31,21 @@ class HomeScreen extends Component {
     navigation.dispatch(navigateAction);
   }
 
-  fetchDataFromServer() {
-    const { fetchHomeData } = this.props;
-    fetchHomeData();
-  }
-
   render() {
     const { homeData, isFetching } = this.props;
     return (
       <View style={styles.container}>
-        {homeData && homeData.map(item => (
+        {!isEmpty(homeData.title) &&
+          <View style={styles.title}>
+            <Text style={styles.titleText}>{homeData.title}</Text>
+          </View>
+        }
+        {!isEmpty(homeData) && homeData.items.map(item => (
           <View style={styles.item} key={item}>
             <Text>{item}</Text>
           </View>
         ))}
         <View style={styles.section}>
-          <View style={styles.btnContainer}>
-            <TouchableOpacity style={styles.btnSubmit} onPress={() => this.fetchDataFromServer()}>
-              <Text style={{ textAlign: 'center', color: Colors.primary }}>Retrieve data from server</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.section}>        
           <View style={styles.btnContainer}>
             <TouchableOpacity style={styles.btnSubmit} onPress={() => this.logout()}>
               <Text style={{ textAlign: 'center', color: Colors.primary }}>Logout</Text>
@@ -107,6 +106,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'transparent',
     height: 10,
+  },
+  title: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+  },
+  titleText: {
+    fontWeight: 'bold',
   },
 });
 

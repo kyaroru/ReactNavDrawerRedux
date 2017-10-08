@@ -5,7 +5,7 @@ import NavBarItem from '../common/NavBarItem';
 
 class DrawerMenu extends Component {
   render() {
-    const { navigation } = this.props;
+    const { navigation, currentScreenName } = this.props;
     return (
       <NavBarItem
         iconName="bars"
@@ -13,7 +13,7 @@ class DrawerMenu extends Component {
           if (navigation.state.index === 0) {
             // check if drawer is not open, then only open it
             navigation.navigate('DrawerOpen');
-            this.props.fetchDrawerItems(); 
+            this.props.fetchDrawerItems(currentScreenName);
           } else {
             // else close the drawer
             navigation.navigate('DrawerClose');
@@ -24,8 +24,12 @@ class DrawerMenu extends Component {
   }
 }
 
+const mapStateToProps = store => ({
+  currentScreenName: Actions.getCurrentScreenName(store),
+});
+
 const mapDispatchToProps = {
   fetchDrawerItems: Actions.fetchDrawerItems,
 };
 
-export default connect(null, mapDispatchToProps)(DrawerMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(DrawerMenu);

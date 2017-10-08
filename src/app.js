@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AppNavigator from './navigation';
 import { addNavigationHelpers } from 'react-navigation';
+import AppNavigator from './navigation';
 
 class App extends Component {
   render() {

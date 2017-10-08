@@ -3,12 +3,12 @@ import Actions from 'actions';
 import { delay } from 'redux-saga';
 import * as api from '../api';
 
-function* fetchFromAPI() {
+function* fetchFromAPI(screenName) {
   try {
-    const result = yield call(api.fetchDrawerItems);
-    yield call(delay, 5000);
+    const result = yield call(api.fetchDrawerItems, screenName);
+    yield call(delay, 2000);
     if (result) {
-      yield put(Actions.fetchDrawerItemsSuccess(result.drawerItems));
+      yield put(Actions.fetchDrawerItemsSuccess(result.title, result.items));
     }
   } finally {
     if (yield cancelled()) {
@@ -17,8 +17,8 @@ function* fetchFromAPI() {
   }
 }
 
-function* fetchDrawerItems() {
-  const task = yield fork(fetchFromAPI);
+function* fetchDrawerItems({ screenName }) {
+  const task = yield fork(fetchFromAPI, screenName);
   const { routeName } = yield take(Actions.GO_TO);
   const isFetchingDrawerItems = yield select(Actions.isFetchingDrawerItems);
   if (routeName === 'DrawerClose' && isFetchingDrawerItems) {

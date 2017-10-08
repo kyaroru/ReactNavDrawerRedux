@@ -1,6 +1,6 @@
 import Actions from 'actions';
 
-const drawer = (state = { items: ['HomeScreen'], isFetching: false, error: null }, action) => {
+const drawer = (state = { title: 'Drawer Items', items: ['HomeScreen'], isFetching: false, error: null }, action) => {
   switch (action.type) {
     case Actions.FETCH_DRAWER_ITEMS:
       return {
@@ -11,6 +11,7 @@ const drawer = (state = { items: ['HomeScreen'], isFetching: false, error: null 
     case Actions.FETCH_DRAWER_ITEMS_SUCCESS:
       return {
         items: action.items,
+        title: action.title,
         isFetching: false,
         error: null,
       };

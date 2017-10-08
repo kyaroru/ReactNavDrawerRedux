@@ -38,6 +38,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     height: 10,
   },
+  drawerItemTitle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+  },
+  drawerItemTitleText: {
+    fontWeight: 'bold',
+  },
 });
 
 class DrawerContent extends Component {
@@ -45,6 +53,7 @@ class DrawerContent extends Component {
     const { navigation } = this.props;
     navigation.navigate(item.key);
   }
+
   renderDrawerItem(route) {
     const { drawerItems } = this.props;
     if (drawerItems.indexOf(route.key) > -1) {
@@ -58,9 +67,12 @@ class DrawerContent extends Component {
   }
 
   render() {
-    const { navigation, isFetching } = this.props;
+    const { navigation, isFetching, drawerItemsTitle } = this.props;
     return (
       <View style={styles.container}>
+        {!isFetching && <View style={styles.drawerItemTitle}>
+          <Text style={styles.drawerItemTitleText}>{drawerItemsTitle}</Text>
+        </View>}
         {!isFetching && <View>
           {navigation.state.routes.map(route => this.renderDrawerItem(route))}
         </View>}
@@ -79,6 +91,7 @@ class DrawerContent extends Component {
 
 const mapStateToProps = store => ({
   drawerItems: store.DRAWER.items,
+  drawerItemsTitle: store.DRAWER.title,
   isFetching: store.DRAWER.isFetching,
 });
 
