@@ -5,6 +5,8 @@ import {
   Text,
   TouchableOpacity,
   ActivityIndicator,
+  BackHandler,
+  Platform,
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import Actions from 'actions';
@@ -13,9 +15,34 @@ import isEmpty from 'lodash/isEmpty';
 import * as Colors from '../../themes/colors';
 
 class HomeScreen extends Component {
+  constructor() {
+    super();
+    this.handleBackButton = this.handleBackButton.bind(this);
+  }
+
   componentDidMount() {
     const { fetchHomeData } = this.props;
+    if (Platform.OS === 'android') {
+      BackHandler.addEventListener('backPress', this.handleBackButton);
+    }
     fetchHomeData('video-11');
+  }
+
+  getBackButton(items) {
+    const backButton = items.find(x => x.title === 'Back');
+    return backButton || {};
+  }
+
+  handleBackButton() {
+    const { homeData } = this.props;
+    if (!isEmpty(homeData) && homeData.body) {
+      const backButton = this.getBackButton(homeData.body);
+      if (!isEmpty(backButton)) {
+        this.props.fetchHomeData(backButton.link);
+        return true;
+      }
+    }
+    return false;
   }
 
   openTarget(item) {

@@ -8,6 +8,10 @@ It consists only 1 screen in drawer navigatior which is HomeScreen that will ren
 
 ![Demo](http://g.recordit.co/rRfkYiCU7Q.gif)
 
+**Android Back Button Demo**
+
+![Demo](http://g.recordit.co/e1Oat1wFLk.gif)
+
 **Navigation Structure**
 ```
 -StackNavigator
