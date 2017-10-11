@@ -28,19 +28,11 @@ class HomeScreen extends Component {
     fetchHomeData('video-11');
   }
 
-  getBackButton(items) {
-    const backButton = items.find(x => x.title === 'Back');
-    return backButton || {};
-  }
-
   handleBackButton() {
-    const { homeData } = this.props;
-    if (!isEmpty(homeData) && homeData.body) {
-      const backButton = this.getBackButton(homeData.body);
-      if (!isEmpty(backButton)) {
-        this.props.fetchHomeData(backButton.link);
-        return true;
-      }
+    const { homeDataLength } = this.props;
+    if (homeDataLength > 1) {
+      this.props.popHomeData();
+      return true;
     }
     return false;
   }
@@ -52,7 +44,11 @@ class HomeScreen extends Component {
       this.props.fetchDrawerItems();
       this.props.navigation.navigate('DrawerOpen');
     } else {
-      this.props.fetchHomeData(item.link);
+      if (item.title === 'Back') {
+        this.props.popHomeData();
+      } else {
+        this.props.fetchHomeData(item.link);
+      }
     }
   }
 
@@ -60,7 +56,7 @@ class HomeScreen extends Component {
     const { homeData, isFetching } = this.props;
     return (
       <View style={styles.container}>
-        {!isEmpty(homeData.title) &&
+        {!isEmpty(homeData) && !isEmpty(homeData.title) &&
           <View style={styles.title}>
             <Text style={styles.titleText}>{homeData.title}</Text>
           </View>
@@ -142,7 +138,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = store => ({
   currentUser: store.USER,
   drawerItems: store.DRAWER.items,
-  homeData: store.HOME.data,
+  homeData: Actions.getCurrentHomeData(store),
+  homeDataLength: Actions.getHomeDataLength(store),
   isFetching: store.HOME.isFetching,
   drawerLink: Actions.getDrawerLink(store),
 });
@@ -151,6 +148,7 @@ const mapDispatchToProps = {
   updateCurrentUser: Actions.updateCurrentUser,
   updateDrawerItems: Actions.updateDrawerItems,
   fetchHomeData: Actions.fetchHomeData,
+  popHomeData: Actions.popHomeData,
   clearHomeData: Actions.clearHomeData,
   fetchDrawerItems: Actions.fetchDrawerItems,
   setDrawerLink: Actions.setDrawerLink,
