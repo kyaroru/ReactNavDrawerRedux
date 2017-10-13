@@ -12,6 +12,10 @@ It consists only 1 screen in drawer navigatior which is HomeScreen that will ren
 
 ![Demo](http://g.recordit.co/e1Oat1wFLk.gif)
 
+**Cancel API Request if Back Button Pressed**
+
+![Demo](http://g.recordit.co/8Ss9AIPPdI.gif)
+
 **Navigation Structure**
 ```
 -StackNavigator

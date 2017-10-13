@@ -12,6 +12,12 @@
       "title": "Complain",
       "link": "video-11-complain",
       "target": "drawer"
+    },
+    {
+      "type": "button",
+      "title": "Test API Fail",
+      "link": "api-fail",
+      "target": "page"
     }
   ]
 }

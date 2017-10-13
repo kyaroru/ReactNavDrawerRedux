@@ -29,9 +29,9 @@ class HomeScreen extends Component {
   }
 
   handleBackButton() {
-    const { homeDataLength } = this.props;
-    if (homeDataLength > 1) {
-      this.props.popHomeData();
+    const { homeDataLength, isFetching } = this.props;
+    if (homeDataLength > 1 || (homeDataLength === 1 && isFetching)) {
+      this.props.attemptPopHomeData();
       return true;
     }
     return false;
@@ -45,7 +45,7 @@ class HomeScreen extends Component {
       this.props.navigation.navigate('DrawerOpen');
     } else {
       if (item.title === 'Back') {
-        this.props.popHomeData();
+        this.props.attemptPopHomeData();
       } else {
         this.props.fetchHomeData(item.link);
       }
@@ -140,7 +140,7 @@ const mapStateToProps = store => ({
   drawerItems: store.DRAWER.items,
   homeData: Actions.getCurrentHomeData(store),
   homeDataLength: Actions.getHomeDataLength(store),
-  isFetching: store.HOME.isFetching,
+  isFetching: Actions.isFetchingHomeData(store),
   drawerLink: Actions.getDrawerLink(store),
 });
 
@@ -148,7 +148,7 @@ const mapDispatchToProps = {
   updateCurrentUser: Actions.updateCurrentUser,
   updateDrawerItems: Actions.updateDrawerItems,
   fetchHomeData: Actions.fetchHomeData,
-  popHomeData: Actions.popHomeData,
+  attemptPopHomeData: Actions.attemptPopHomeData,
   clearHomeData: Actions.clearHomeData,
   fetchDrawerItems: Actions.fetchDrawerItems,
   setDrawerLink: Actions.setDrawerLink,

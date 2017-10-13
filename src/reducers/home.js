@@ -6,8 +6,6 @@ const popHomeData = (data) => {
       ...data,
     ];
     newData.pop();
-    console.log('after pop');
-    console.log(newData);
     return newData;
   }
   return data;

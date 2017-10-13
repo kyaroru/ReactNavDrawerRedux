@@ -5,7 +5,6 @@ import user333Friends from '../json/user-333-friends';
 import user333chatUser555 from '../json/user-333-chat-user-555';
 
 const defaultDrawerItems = video11Complain;
-const defaultData = video11;
 
 export const fetchDrawerItems = link => new Promise((resolve, reject) => {
   if (link === 'video-11-complain') {
@@ -26,7 +25,9 @@ export const fetchScreenData = screenName => new Promise((resolve, reject) => {
   } else if (screenName === 'user-333-chat-user-555') {
     resolve(user333chatUser555);
   } else {
-    // fall back to default home data (if no screenName matches)
-    resolve(defaultData);
+    const error = {
+      message: 'API Request Failed',
+    };
+    reject(error);
   }
 });
