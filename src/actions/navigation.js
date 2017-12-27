@@ -4,10 +4,17 @@ export const getNavigation = store => store[NAVIGATION];
 
 export const getCurrentScreenName = (store) => {
   const drawerRoute = store[NAVIGATION].routes[0];
-  const drawerInnerRoutes = drawerRoute.routes[0];
-  const currentRouteIndex = drawerInnerRoutes.index;
-  const currentRoute = drawerInnerRoutes.routes[currentRouteIndex];
-  const currentRouteName = currentRoute.key;
+  let drawerInnerRoutes;
+  let currentRouteName;
+  if (drawerRoute.routes) {
+    drawerInnerRoutes = drawerRoute.routes[0];
+    const currentRouteIndex = drawerInnerRoutes.index;
+    const currentRoute = drawerInnerRoutes.routes[currentRouteIndex];
+    currentRouteName = currentRoute.key;
+  } else {
+    drawerInnerRoutes = drawerRoute.routeName;
+    currentRouteName = drawerInnerRoutes;
+  }
   return currentRouteName;
 };
 
