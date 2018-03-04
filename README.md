@@ -28,6 +28,11 @@ react-native run-ios
 react-native run-android
 ```
 
+
 **For example without redux**
 
 Refer to [ReactNavDrawer](https://github.com/kyaroru/ReactNavDrawer)
+
+**For TabNavigator example with REDUX integration**
+
+Refer to [ReactNavTab](https://github.com/kyaroru/ReactNavTab)
